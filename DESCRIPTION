@@ -1,4 +1,4 @@
-Package: BDMMA
+Package: BDMMAcorrect
 Type: Package
 Title: BDMMA could perform meta-analysis for the metagenomic read counts data from different cohorts. 
 Version: 0.1.0
