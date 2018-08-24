@@ -9,7 +9,7 @@ using namespace Rcpp;
 
 // DM
 NumericVector DM(arma::mat Y, arma::mat alpha);
-RcppExport SEXP _BDMMA_DM(SEXP YSEXP, SEXP alphaSEXP) {
+RcppExport SEXP _BDMMAcorrect_DM(SEXP YSEXP, SEXP alphaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ END_RCPP
 }
 // DM_diff
 double DM_diff(arma::mat Y, arma::mat alpha1, arma::mat alpha2, int g);
-RcppExport SEXP _BDMMA_DM_diff(SEXP YSEXP, SEXP alpha1SEXP, SEXP alpha2SEXP, SEXP gSEXP) {
+RcppExport SEXP _BDMMAcorrect_DM_diff(SEXP YSEXP, SEXP alpha1SEXP, SEXP alpha2SEXP, SEXP gSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -35,7 +35,7 @@ END_RCPP
 }
 // update_alpha2
 arma::mat update_alpha2(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat beta, int T, double lambda, arma::vec prop, arma::mat delta_m);
-RcppExport SEXP _BDMMA_update_alpha2(SEXP alphaSEXP, SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP TSEXP, SEXP lambdaSEXP, SEXP propSEXP, SEXP delta_mSEXP) {
+RcppExport SEXP _BDMMAcorrect_update_alpha2(SEXP alphaSEXP, SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP TSEXP, SEXP lambdaSEXP, SEXP propSEXP, SEXP delta_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -54,7 +54,7 @@ END_RCPP
 }
 // update_beta1
 arma::mat update_beta1(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat beta, int T, arma::vec L, double sigma1, double eta, arma::mat delta_m);
-RcppExport SEXP _BDMMA_update_beta1(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP TSEXP, SEXP LSEXP, SEXP sigma1SEXP, SEXP etaSEXP, SEXP delta_mSEXP) {
+RcppExport SEXP _BDMMAcorrect_update_beta1(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP TSEXP, SEXP LSEXP, SEXP sigma1SEXP, SEXP etaSEXP, SEXP delta_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -73,7 +73,7 @@ END_RCPP
 }
 // update_beta
 arma::mat update_beta(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat beta, int T, int K, double sigma2, arma::mat delta_m);
-RcppExport SEXP _BDMMA_update_beta(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP TSEXP, SEXP KSEXP, SEXP sigma2SEXP, SEXP delta_mSEXP) {
+RcppExport SEXP _BDMMAcorrect_update_beta(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP TSEXP, SEXP KSEXP, SEXP sigma2SEXP, SEXP delta_mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -91,7 +91,7 @@ END_RCPP
 }
 // update_delta
 arma::mat update_delta(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat delta, arma::mat delta_m, arma::mat beta, arma::mat e_delta, arma::vec batch, int N, int T, int I, double sigma3);
-RcppExport SEXP _BDMMA_update_delta(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP betaSEXP, SEXP e_deltaSEXP, SEXP batchSEXP, SEXP NSEXP, SEXP TSEXP, SEXP ISEXP, SEXP sigma3SEXP) {
+RcppExport SEXP _BDMMAcorrect_update_delta(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP betaSEXP, SEXP e_deltaSEXP, SEXP batchSEXP, SEXP NSEXP, SEXP TSEXP, SEXP ISEXP, SEXP sigma3SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -113,7 +113,7 @@ END_RCPP
 }
 // Mat_To_Rowvec
 arma::rowvec Mat_To_Rowvec(arma::mat m);
-RcppExport SEXP _BDMMA_Mat_To_Rowvec(SEXP mSEXP) {
+RcppExport SEXP _BDMMAcorrect_Mat_To_Rowvec(SEXP mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -124,7 +124,7 @@ END_RCPP
 }
 // MCMC
 arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat beta, arma::mat delta, arma::mat delta_m, arma::mat e_delta, int T, int N, int K, int I, double lambda, arma::vec prop, arma::vec L, double sigma1, double sigma2, double sigma3, int iter, double eta, double a, double b, double p, arma::vec batch);
-RcppExport SEXP _BDMMA_MCMC(SEXP alphaSEXP, SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP e_deltaSEXP, SEXP TSEXP, SEXP NSEXP, SEXP KSEXP, SEXP ISEXP, SEXP lambdaSEXP, SEXP propSEXP, SEXP LSEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP sigma3SEXP, SEXP iterSEXP, SEXP etaSEXP, SEXP aSEXP, SEXP bSEXP, SEXP pSEXP, SEXP batchSEXP) {
+RcppExport SEXP _BDMMAcorrect_MCMC(SEXP alphaSEXP, SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP e_deltaSEXP, SEXP TSEXP, SEXP NSEXP, SEXP KSEXP, SEXP ISEXP, SEXP lambdaSEXP, SEXP propSEXP, SEXP LSEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP sigma3SEXP, SEXP iterSEXP, SEXP etaSEXP, SEXP aSEXP, SEXP bSEXP, SEXP pSEXP, SEXP batchSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -158,18 +158,18 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_BDMMA_DM", (DL_FUNC) &_BDMMA_DM, 2},
-    {"_BDMMA_DM_diff", (DL_FUNC) &_BDMMA_DM_diff, 4},
-    {"_BDMMA_update_alpha2", (DL_FUNC) &_BDMMA_update_alpha2, 9},
-    {"_BDMMA_update_beta1", (DL_FUNC) &_BDMMA_update_beta1, 9},
-    {"_BDMMA_update_beta", (DL_FUNC) &_BDMMA_update_beta, 8},
-    {"_BDMMA_update_delta", (DL_FUNC) &_BDMMA_update_delta, 12},
-    {"_BDMMA_Mat_To_Rowvec", (DL_FUNC) &_BDMMA_Mat_To_Rowvec, 1},
-    {"_BDMMA_MCMC", (DL_FUNC) &_BDMMA_MCMC, 24},
+    {"_BDMMAcorrect_DM", (DL_FUNC) &_BDMMAcorrect_DM, 2},
+    {"_BDMMAcorrect_DM_diff", (DL_FUNC) &_BDMMAcorrect_DM_diff, 4},
+    {"_BDMMAcorrect_update_alpha2", (DL_FUNC) &_BDMMAcorrect_update_alpha2, 9},
+    {"_BDMMAcorrect_update_beta1", (DL_FUNC) &_BDMMAcorrect_update_beta1, 9},
+    {"_BDMMAcorrect_update_beta", (DL_FUNC) &_BDMMAcorrect_update_beta, 8},
+    {"_BDMMAcorrect_update_delta", (DL_FUNC) &_BDMMAcorrect_update_delta, 12},
+    {"_BDMMAcorrect_Mat_To_Rowvec", (DL_FUNC) &_BDMMAcorrect_Mat_To_Rowvec, 1},
+    {"_BDMMAcorrect_MCMC", (DL_FUNC) &_BDMMAcorrect_MCMC, 24},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_BDMMA(DllInfo *dll) {
+RcppExport void R_init_BDMMAcorrect(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }
