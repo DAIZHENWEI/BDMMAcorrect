@@ -176,7 +176,7 @@ arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y,
               double sigma1, double sigma2, double sigma3, int iter,
               double eta, double a, double b, double p, arma::vec batch){
 
-  double shape, scale, shape2, scale2, prob, p1, p2, var;
+  double shape, scale, shape2, scale2, prob, p1, p2;
   arma::mat delta_out, final_out, alpha_all(iter,T), beta1_all(iter,T), beta2_all(iter,T*(K-1)),
   L_all(iter,T), beta_out(K+1,T), delta_all(iter,T*I);
   arma::rowvec mean_alpha(T), mean_beta1(T);
