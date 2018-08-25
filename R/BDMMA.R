@@ -98,7 +98,7 @@ BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in =
 
   cat("#################### Start MCMC ####################\n\n")
 
-  output = .Call('_BDMMA_MCMC', PACKAGE = 'BDMMA', alpha = alpha, alpha_m = alpha_m, x = X, y = YY,
+  output = .Call('_BDMMAcorrect_MCMC', PACKAGE = 'BDMMAcorrect', alpha = alpha, alpha_m = alpha_m, x = X, y = YY,
                 beta = beta, delta = delta, delta_m = delta_m, e_delta = t(delta),
                 T = n_dim, N = nrow(YY), K = n_var, I = n_batch, lambda = lambda,
                 prop = s_prop, L = L, sigma1 = sigma1, sigma2 = sigma2, sigma3 = sigma3,
