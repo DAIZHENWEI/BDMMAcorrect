@@ -11,6 +11,7 @@
 
 //[[Rcpp::depends(RcppArmadillo)]]
 //[[Rcpp::depends(RcppEigen)]]
+//[[Rcpp::plugins("cpp11")]]
 
 
 using namespace Rcpp;
