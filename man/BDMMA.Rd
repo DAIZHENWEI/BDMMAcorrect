@@ -15,6 +15,8 @@ The first column represents the main effect variable.}
 \item{Y}{A data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.}
 
 \item{batch}{A numeric vector labeling the batch for each sample.}
+  
+\item{continuous}{A numeric vector indicating whether the corresponding covariates are continuous or discrete. 0 represents the discrete covariates, and 1 represents the continuous covariates.}
 
 \item{abundance_threshold}{The minimum abundance level for the taxa to be included (default value = 5e-05).}
 
