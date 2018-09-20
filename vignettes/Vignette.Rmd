@@ -1,8 +1,12 @@
 ---
 title: "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression"
 author: "DAI ZHENWEI"
-date: "22 August, 2018"
+date: "20 Sept, 2018"
 output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{BDMMAcorrect_user_guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=FALSE}
