@@ -190,9 +190,7 @@ arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y,
   for (int iteration = 1; iteration <= iter; iteration++){
 
     // Update alpha
-    alpha_m = update_alpha2(alpha = alpha,alpha_m = alpha_m,x = x,y = y,
-                            beta=beta, T=T, lambda = lambda, prop = prop,
-                            delta_m=delta_m);
+    alpha_m = update_alpha2(alpha, alpha_m, x, y, beta, T, lambda, prop, delta_m);
     alpha=alpha_m.row(0);
     alpha_all.row(iteration-1)=alpha;
 
@@ -202,8 +200,7 @@ arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y,
     lambda=1/(R::rgamma(shape,scale));
 
     // Update beta[1,]
-    beta=update_beta1(alpha_m = alpha_m,x=x,y=y,beta = beta,T=T,L=L,
-                      sigma1=sigma1,eta=eta,delta_m=delta_m);
+    beta=update_beta1(alpha_m, x, y, beta, T, L, sigma1, eta, delta_m);
     beta1_all.row(iteration-1)=beta.row(0);
 
     // Update L
@@ -229,15 +226,12 @@ arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y,
 
     // Update beta[-1,]
     if (K>=2){
-      beta=update_beta(alpha_m = alpha_m,x=x,y=y,beta = beta,T=T,
-                       K=K,sigma2 = sigma2,delta_m=delta_m);
+      beta=update_beta(alpha_m, x, y, beta, T, K, sigma2, delta_m);
       beta2_all.row(iteration-1)=Mat_To_Rowvec(beta.rows(1,K-1));
     }
 
     // Update delta
-    delta_out=update_delta(alpha_m=alpha_m, x=x, y=y, delta=delta,
-                           delta_m=delta_m, beta=beta, e_delta=e_delta,
-                           batch=batch, N=N, T=T, I=I, sigma3=sigma3);
+    delta_out=update_delta(alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3);
 
     delta=delta_out.rows(0,I-1);
     delta_m=delta_out.rows(I,N+I-1);
