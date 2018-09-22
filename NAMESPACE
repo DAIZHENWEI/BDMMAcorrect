@@ -1,4 +1,7 @@
-exportPattern("^[[:alpha:]]+")
+export(BDMMA)
+export(fdr_cut)
+export(trace_plot)
+export(VBatch)
 importFrom(Rcpp, evalCpp)
 importFrom(RcppArmadillo)
 importFrom(RcppEigen)
