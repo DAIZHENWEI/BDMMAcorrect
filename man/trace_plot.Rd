@@ -25,7 +25,7 @@ X <- dat$X
 Y <- dat$Y
 batch <- dat$batch
 continuous <- dat$continuous
-output <- BDMMA(X, Y, batch, continuous, burn_in = 1000, sample_period = 1000)
+output <- BDMMA(X, Y, batch, continuous, burn_in = 600, sample_period = 600)
 figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))
 print(figure)
 }
