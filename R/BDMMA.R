@@ -27,7 +27,7 @@
 #' Y <- dat$Y
 #' batch <- dat$batch
 #' continuous <- dat$continuous
-#' output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+#' output <- BDMMA(X, Y, batch, continuous, burn_in = 600, sample_period = 600)
 #' @export
 
 BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in = 5000,
@@ -288,7 +288,7 @@ fdr_cut = function(PIP_vec, alpha = 0.1){
 #' Y <- dat$Y
 #' batch <- dat$batch
 #' continuous <- dat$continuous
-#' output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+#' output <- BDMMA(X, Y, batch, continuous, burn_in = 600, sample_period = 600)
 #' figure <- trace_plot(trace, param = c("alpha_1", "beta1_10"))
 #' print(figure)
 #' @export
