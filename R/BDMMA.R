@@ -85,7 +85,7 @@ BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in =
     L[i] = rbinom(size = 1, n = 1, prob = p)
   }
 
-  alpha_m = matrix(alpha, nrow = nrow(YY), ncol = n_dim, byrow = T)
+  alpha_m = matrix(alpha, nrow = nrow(YY), ncol = n_dim, byrow = TRUE)
   beta = matrix(0, nrow = n_var, ncol = n_dim)
   delta = matrix(0, nrow = n_batch, ncol = n_dim)
   delta_m = matrix(0, nrow = nrow(YY), ncol = n_dim)
