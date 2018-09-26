@@ -50,5 +50,6 @@ X <- dat$X
 Y <- dat$Y
 batch <- dat$batch
 continuous <- dat$continuous
-output <- BDMMA(X, Y, batch, continuous, burn_in = 600, sample_period = 600)
+(not run)
+## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
 }
