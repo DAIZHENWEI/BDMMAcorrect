@@ -27,7 +27,7 @@
 #' Y <- dat$Y
 #' batch <- dat$batch
 #' continuous <- dat$continuous
-#' (not run)
+#' ## (not run)
 #' ## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
 #' @export
 
@@ -289,7 +289,7 @@ fdr_cut = function(PIP_vec, alpha = 0.1){
 #' Y <- dat$Y
 #' batch <- dat$batch
 #' continuous <- dat$continuous
-#' (not run)
+#' ## (not run)
 #' ## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
 #' ## figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))
 #' ## print(figure)
