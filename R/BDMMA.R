@@ -97,13 +97,15 @@ BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in =
   X = as.matrix(X)
   YY = as.matrix(YY)
   
+  batch_count = table(batch)
+  
   cat("#################### Start MCMC ####################\n\n")
   
   output = .Call('_BDMMAcorrect_MCMC', PACKAGE = 'BDMMAcorrect', alpha = alpha, alpha_m = alpha_m, x = X, y = YY,
                  beta = beta, delta = delta, delta_m = delta_m, e_delta = t(delta),
                  T = n_dim, N = nrow(YY), K = n_var, I = n_batch, lambda = lambda,
                  prop = s_prop, L = L, sigma1 = sigma1, sigma2 = sigma2, sigma3 = sigma3,
-                 iter = iter, eta = eta, a = a, b = b, p = p, batch = batch)
+                 iter = iter, eta = eta, a = a, b = b, p = p, batch = batch, weight = batch_count)
   
   ## calculate the posterior mean of parameters
   alpha_mean = apply(output[(iter-sample_period):iter, seq_len(n_dim)], 2, mean)
