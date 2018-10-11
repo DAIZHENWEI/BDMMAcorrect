@@ -133,7 +133,7 @@ arma::mat update_beta(arma::mat alpha_m, arma::mat x, arma::mat y,
 
 arma::mat update_delta(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat delta,
                        arma::mat delta_m, arma::mat beta, arma::mat e_delta,
-                       arma::vec batch, int N, int T, int I, double sigma3){
+                       arma::vec batch, int N, int T, int I, double sigma3, arma::rowvec weight){
   NumericVector f;
   double delta_g;
   arma::mat delta2 = delta;
@@ -151,7 +151,7 @@ arma::mat update_delta(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat de
       if (is_true(any(runif(1,0,1)<exp(f)))){
         delta(j,g)=delta_g;
       }
-      delta.row(3)=-(109*delta.row(0)+152*delta.row(1)+165*delta.row(2))/100;
+      delta.row(I-1)=-(weight.subvec(0,I-2) * delta.rows(0,I-2))/weight(I-1);
       for (int i=0;i<(N-1);i++) {
         delta_m.row(i)=delta.row(batch(i+1)-1);
       }
@@ -179,7 +179,7 @@ arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y,
               arma::mat beta, arma::mat delta, arma::mat delta_m, arma::mat e_delta,
               int T, int N, int K, int I, double lambda, arma::vec prop, arma::vec L,
               double sigma1, double sigma2, double sigma3, int iter,
-              double eta, double a, double b, double p, arma::vec batch){
+              double eta, double a, double b, double p, arma::vec batch, arma::rowvec weight){
 
   double shape, scale, shape2, scale2, prob, p1, p2;
   arma::mat delta_out, final_out, alpha_all(iter,T), beta1_all(iter,T), beta2_all(iter,T*(K-1)),
@@ -231,7 +231,7 @@ arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y,
     }
 
     // Update delta
-    delta_out=update_delta(alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3);
+    delta_out=update_delta(alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3, weight);
 
     delta=delta_out.rows(0,I-1);
     delta_m=delta_out.rows(I,N+I-1);
