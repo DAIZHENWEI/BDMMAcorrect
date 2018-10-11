@@ -90,8 +90,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // update_delta
-arma::mat update_delta(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat delta, arma::mat delta_m, arma::mat beta, arma::mat e_delta, arma::vec batch, int N, int T, int I, double sigma3);
-RcppExport SEXP _BDMMAcorrect_update_delta(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP betaSEXP, SEXP e_deltaSEXP, SEXP batchSEXP, SEXP NSEXP, SEXP TSEXP, SEXP ISEXP, SEXP sigma3SEXP) {
+arma::mat update_delta(arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat delta, arma::mat delta_m, arma::mat beta, arma::mat e_delta, arma::vec batch, int N, int T, int I, double sigma3, arma::rowvec weight);
+RcppExport SEXP _BDMMAcorrect_update_delta(SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP betaSEXP, SEXP e_deltaSEXP, SEXP batchSEXP, SEXP NSEXP, SEXP TSEXP, SEXP ISEXP, SEXP sigma3SEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -107,7 +107,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type T(TSEXP);
     Rcpp::traits::input_parameter< int >::type I(ISEXP);
     Rcpp::traits::input_parameter< double >::type sigma3(sigma3SEXP);
-    rcpp_result_gen = Rcpp::wrap(update_delta(alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3));
+    Rcpp::traits::input_parameter< arma::rowvec >::type weight(weightSEXP);
+    rcpp_result_gen = Rcpp::wrap(update_delta(alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3, weight));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -123,8 +124,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // MCMC
-arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat beta, arma::mat delta, arma::mat delta_m, arma::mat e_delta, int T, int N, int K, int I, double lambda, arma::vec prop, arma::vec L, double sigma1, double sigma2, double sigma3, int iter, double eta, double a, double b, double p, arma::vec batch);
-RcppExport SEXP _BDMMAcorrect_MCMC(SEXP alphaSEXP, SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP e_deltaSEXP, SEXP TSEXP, SEXP NSEXP, SEXP KSEXP, SEXP ISEXP, SEXP lambdaSEXP, SEXP propSEXP, SEXP LSEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP sigma3SEXP, SEXP iterSEXP, SEXP etaSEXP, SEXP aSEXP, SEXP bSEXP, SEXP pSEXP, SEXP batchSEXP) {
+arma::mat MCMC(arma::rowvec alpha, arma::mat alpha_m, arma::mat x, arma::mat y, arma::mat beta, arma::mat delta, arma::mat delta_m, arma::mat e_delta, int T, int N, int K, int I, double lambda, arma::vec prop, arma::vec L, double sigma1, double sigma2, double sigma3, int iter, double eta, double a, double b, double p, arma::vec batch, arma::rowvec weight);
+RcppExport SEXP _BDMMAcorrect_MCMC(SEXP alphaSEXP, SEXP alpha_mSEXP, SEXP xSEXP, SEXP ySEXP, SEXP betaSEXP, SEXP deltaSEXP, SEXP delta_mSEXP, SEXP e_deltaSEXP, SEXP TSEXP, SEXP NSEXP, SEXP KSEXP, SEXP ISEXP, SEXP lambdaSEXP, SEXP propSEXP, SEXP LSEXP, SEXP sigma1SEXP, SEXP sigma2SEXP, SEXP sigma3SEXP, SEXP iterSEXP, SEXP etaSEXP, SEXP aSEXP, SEXP bSEXP, SEXP pSEXP, SEXP batchSEXP, SEXP weightSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -152,6 +153,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type b(bSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type batch(batchSEXP);
+    Rcpp::traits::input_parameter< arma::rowvec >::type weight(weightSEXP);
     rcpp_result_gen = Rcpp::wrap(MCMC(alpha, alpha_m, x, y, beta, delta, delta_m, e_delta, T, N, K, I, lambda, prop, L, sigma1, sigma2, sigma3, iter, eta, a, b, p, batch, weight));
     return rcpp_result_gen;
 END_RCPP
@@ -163,9 +165,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_BDMMAcorrect_update_alpha2", (DL_FUNC) &_BDMMAcorrect_update_alpha2, 9},
     {"_BDMMAcorrect_update_beta1", (DL_FUNC) &_BDMMAcorrect_update_beta1, 9},
     {"_BDMMAcorrect_update_beta", (DL_FUNC) &_BDMMAcorrect_update_beta, 8},
-    {"_BDMMAcorrect_update_delta", (DL_FUNC) &_BDMMAcorrect_update_delta, 12},
+    {"_BDMMAcorrect_update_delta", (DL_FUNC) &_BDMMAcorrect_update_delta, 13},
     {"_BDMMAcorrect_Mat_To_Rowvec", (DL_FUNC) &_BDMMAcorrect_Mat_To_Rowvec, 1},
-    {"_BDMMAcorrect_MCMC", (DL_FUNC) &_BDMMAcorrect_MCMC, 24},
+    {"_BDMMAcorrect_MCMC", (DL_FUNC) &_BDMMAcorrect_MCMC, 25},
     {NULL, NULL, 0}
 };
 
