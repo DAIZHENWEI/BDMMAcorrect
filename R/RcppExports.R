@@ -22,7 +22,7 @@ update_beta <- function(alpha_m, x, y, beta, T, K, sigma2, delta_m) {
 }
 
 update_delta <- function(alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3) {
-    .Call('_BDMMAcorrect_update_delta', PACKAGE = 'BDMMAcorrect', alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3)
+    .Call('_BDMMAcorrect_update_delta', PACKAGE = 'BDMMAcorrect', alpha_m, x, y, delta, delta_m, beta, e_delta, batch, N, T, I, sigma3, weight)
 }
 
 Mat_To_Rowvec <- function(m) {
@@ -30,6 +30,6 @@ Mat_To_Rowvec <- function(m) {
 }
 
 MCMC <- function(alpha, alpha_m, x, y, beta, delta, delta_m, e_delta, T, N, K, I, lambda, prop, L, sigma1, sigma2, sigma3, iter, eta, a, b, p, batch) {
-    .Call('_BDMMAcorrect_MCMC', PACKAGE = 'BDMMAcorrect', alpha, alpha_m, x, y, beta, delta, delta_m, e_delta, T, N, K, I, lambda, prop, L, sigma1, sigma2, sigma3, iter, eta, a, b, p, batch)
+    .Call('_BDMMAcorrect_MCMC', PACKAGE = 'BDMMAcorrect', alpha, alpha_m, x, y, beta, delta, delta_m, e_delta, T, N, K, I, lambda, prop, L, sigma1, sigma2, sigma3, iter, eta, a, b, p, batch, weight)
 }
 
