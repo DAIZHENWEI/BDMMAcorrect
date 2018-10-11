@@ -152,7 +152,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type b(bSEXP);
     Rcpp::traits::input_parameter< double >::type p(pSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type batch(batchSEXP);
-    rcpp_result_gen = Rcpp::wrap(MCMC(alpha, alpha_m, x, y, beta, delta, delta_m, e_delta, T, N, K, I, lambda, prop, L, sigma1, sigma2, sigma3, iter, eta, a, b, p, batch));
+    rcpp_result_gen = Rcpp::wrap(MCMC(alpha, alpha_m, x, y, beta, delta, delta_m, e_delta, T, N, K, I, lambda, prop, L, sigma1, sigma2, sigma3, iter, eta, a, b, p, batch, weight));
     return rcpp_result_gen;
 END_RCPP
 }
