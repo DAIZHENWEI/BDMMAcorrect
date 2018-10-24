@@ -20,11 +20,11 @@ The function returns a list containing plot objects of parameters' trace plot.
 Trace plot of BDMMA output
 }
 \examples{
-data(dat)
-X <- dat$X
-Y <- dat$Y
-batch <- dat$batch
-continuous <- dat$continuous
+data(Microbiome_dat)
+X <- Microbiome_dat$pheno
+Y <- t(Microbiome_dat$counts)
+batch <- Microbiome_dat$batch
+continuous <- Microbiome_dat$continuous
 ## (not run)
 ## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
 ## figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))

@@ -5,8 +5,8 @@
 \alias{BDMMA}
 \title{Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read counts}
 \usage{
-BDMMA(X, Y, batch, continuous, abundance_threshold = 5e-05, burn_in = 5000,
-  sample_period = 5000, bFDR = 0.1, PIPcut = 0.5)
+BDMMA(X, Y, batch, continuous, abundance_threshold = 5e-05,
+  burn_in = 5000, sample_period = 5000, bFDR = 0.1, PIPcut = 0.5)
 }
 \arguments{
 \item{X}{A data.frame for covariates, including main effect variable and confounding variables.
@@ -15,8 +15,6 @@ The first column represents the main effect variable.}
 \item{Y}{A data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.}
 
 \item{batch}{A numeric vector labeling the batch for each sample.}
-  
-\item{continuous}{A numeric vector indicating whether the corresponding covariates are continuous or discrete. 0 represents the discrete covariates, and 1 represents the continuous covariates.}
 
 \item{abundance_threshold}{The minimum abundance level for the taxa to be included (default value = 5e-05).}
 
@@ -39,17 +37,17 @@ the g-th taxon and j-th input variables; deltai_g: the batch effect parameter of
 L_g: the posterior selection probability of g-th taxon; p: the proportion of significantly associated
 taxa; eta: the standard deviation of the spike distribution (in the spike-and-slab prior).}
 \item{PIP}{A vector contains the PIPs of selected microbial taxa.}
-\item{bFDR}{The resulting bFDR under the selected microbial taxa.}
+\item{bFDR}{The corresponding bFDR under the selected microbial taxa.}
 }
 \description{
 Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read counts
 }
 \examples{
-data(dat)
-X <- dat$X
-Y <- dat$Y
-batch <- dat$batch
-continuous <- dat$continuous
+data(Microbiome_dat)
+X <- Microbiome_dat$pheno
+Y <- t(Microbiome_dat$counts)
+batch <- Microbiome_dat$batch
+continuous <- Microbiome_dat$continuous
 ## (not run)
 ## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
 }

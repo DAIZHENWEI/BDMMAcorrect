@@ -25,8 +25,11 @@ The function returns a list containing plot objects of principal coordinate anal
 Visualize batch effect with principal coordinate analysis
 }
 \examples{
-data(dat)
-figure <- VBatch(dat$Y, batch = dat$batch, main_variable = dat$X[,1], method = "bray")
+data(Microbiome_dat)
+counts=t(Microbiome_dat$counts)
+batch=Microbiome_dat$batch
+pheno=Microbiome_dat$pheno
+figure <- VBatch(counts, batch = batch, main_variable = pheno[,1], method = "bray")
 print(figure[[1]])
 print(figure[[2]])
 }
