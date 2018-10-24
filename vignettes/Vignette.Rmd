@@ -1,7 +1,7 @@
 ---
 title: "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression"
 author: "DAI ZHENWEI"
-date: "20 Sept, 2018"
+date: "23 Oct, 2018"
 output: pdf_document
 vignette: >
   %\VignetteIndexEntry{BDMMAcorrect_user_guide}
@@ -39,29 +39,31 @@ We adopt the Bayesian approach and provide proper prior distributions for the pa
 
 ## 2. Analysis Example
 
-The package includes a sample data set, named 'dat', which can be loaded directly. `dat` is a list containing four arguments, namely `X`: a `data.frame` of covariates containing a main effect variable in the 1st column and a confounding variable in the 2nd column; `Y`: a `data.frame` of the taxonomic read counts containing 80 samples and 40 taxa; `batch`: a numeric vector labeling the batch of each sample; `continuous`: a numeric vector indicating whether the variables are continuous($=0$) or catagorical($\neq 0$).  
+The package includes a sample data set, named 'Microbiome_dat', which can be loaded directly. `Microbiome_dat` is a list containing four arguments, namely `pheno`: a `data.frame` of covariates containing a main effect variable in the 1st column and a confounding variable in the 2nd column; `counts`: a `matrix` of the taxonomic read counts containing 80 samples and 40 taxa (samples in columns and taxa in rows); `batch`: a numeric vector labeling the batch of each sample; `continuous`: a numeric vector indicating whether the variables are continuous($=0$) or catagorical($\neq 0$).  
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(BDMMAcorrect)
 ```
 ```{r, echo=T}
-data(dat)
-attributes(dat)
+data(Microbiome_dat)
+names(Microbiome_dat)
+attach(Microbiome_dat)
 ```
 
 
 `BDMMAcorrect` provides a function to visualize the differences of the taxonomic composition across cohorts with the principal coordinate analysis. `VBatch` plots the first two principal coordinates of the corresponding samples and the 80% confidence ellipse of each batch. 
 
 ```{r, echo=TRUE}
-figure = VBatch(dat$Y, batch = dat$batch, method = "bray")
+counts=as.data.frame(t(counts))
+figure = VBatch(counts, batch = batch, method = "bray")
 print(figure)
 ```
 
 For a case/control study, `VBatch` can also visualize the batch effect of the case and control samples respectively.
 ```{r, echo=TRUE}
-main_variable = dat$X[,1]
+main_variable = pheno[,1]
 main_variable[main_variable == 0] <- "Control"
 main_variable[main_variable == 1] <- "Case"
-figure = VBatch(dat$Y, batch = dat$batch, main_variable = main_variable, method = "bray")
+figure = VBatch(counts, batch = batch, main_variable = main_variable, method = "bray")
 print(figure[[1]])
 ```
 
@@ -69,10 +71,10 @@ print(figure[[1]])
 print(figure[[2]])
 ```
 
-Then, the main function `BDMMA` can work directly on `dat`. `BDMMAcorrect` provides the freedom to ignore the low abundant taxa. `BDMMAcorrect` runs a Markov chain Monte Carlo algorithm to sample from the posterior distribution. The users can set the lengths of the burn-in period and the sampling period for the Markov chain. In this example, the lengths of burn-in and sampling period are set to 4000. 
+Then, the main function `BDMMA` can work directly on `Microbiome_dat`. `BDMMAcorrect` provides the freedom to ignore the low abundant taxa. `BDMMAcorrect` runs a Markov chain Monte Carlo algorithm to sample from the posterior distribution. The users can set the lengths of the burn-in period and the sampling period for the Markov chain. In this example, the lengths of burn-in and sampling period are set to 4000. 
 
 ```{r, echo=TRUE}
-output <- BDMMA(dat$X, dat$Y, dat$batch, dat$continuous, burn_in = 4000, sample_period = 4000)
+output <- BDMMA(pheno, counts, batch, continuous, burn_in = 4000, sample_period = 4000)
 print(output$selected.taxa)
 head(output$parameter_summary)
 print(output$PIP)
