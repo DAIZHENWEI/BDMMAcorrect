@@ -1,7 +1,7 @@
 Package: BDMMAcorrect
 Type: Package
 Title: Meta-analysis for the metagenomic read counts data from different cohorts
-Version: 0.99.21
+Version: 0.99.22
 Author: ZHENWEI DAI <daizwhao@gmail.com>
 Maintainer: ZHENWEI DAI <daizwhao@gmail.com>
 Date: 2018-10-24
