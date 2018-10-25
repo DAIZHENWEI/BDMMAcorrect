@@ -25,10 +25,12 @@ The function returns a list containing plot objects of principal coordinate anal
 Visualize batch effect with principal coordinate analysis
 }
 \examples{
+library(SummarizedExperiment)
 data(Microbiome_dat)
-counts=t(Microbiome_dat$counts)
-batch=Microbiome_dat$batch
-pheno=Microbiome_dat$pheno
+col_data=colData(Microbiome_dat)
+pheno <- data.frame(col_data$V1, col_data$V2)
+counts <- t(assay(Microbiome_dat))
+batch <- col_data[,3]
 figure <- VBatch(counts, batch = batch, main_variable = pheno[,1], method = "bray")
 print(figure[[1]])
 print(figure[[2]])

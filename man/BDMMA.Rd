@@ -43,11 +43,16 @@ taxa; eta: the standard deviation of the spike distribution (in the spike-and-sl
 Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read counts
 }
 \examples{
+library(SummarizedExperiment)
 data(Microbiome_dat)
-X <- Microbiome_dat$pheno
-Y <- t(Microbiome_dat$counts)
-batch <- Microbiome_dat$batch
-continuous <- Microbiome_dat$continuous
+col_data=colData(Microbiome_dat)
+pheno <- data.frame(col_data$V1, col_data$V2)
+counts <- t(assay(Microbiome_dat))
+batch <- col_data[,3]
+continuous <- data.frame(mcols(col_data))
 ## (not run)
-## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+## output <- BDMMA(pheno, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+}
+\references{
+Dai, Zhenwei, et al. "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression." Bioinformatics 1 (2018): 8.
 }
