@@ -42,7 +42,7 @@ We adopt the Bayesian approach and provide proper prior distributions for the pa
 The package includes a sample data set, named 'Microbiome_dat', which can be loaded directly. `Microbiome_dat` is a list containing four arguments, namely `pheno`: a `data.frame` of covariates containing a main effect variable in the 1st column and a confounding variable in the 2nd column; `counts`: a `matrix` of the taxonomic read counts containing 80 samples and 40 taxa (samples in columns and taxa in rows); `batch`: a numeric vector labeling the batch of each sample; `continuous`: a numeric vector indicating whether the variables are continuous($=0$) or catagorical($\neq 0$).  
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(BDMMAcorrect)
-library(SummarizedExperiment)
+require(SummarizedExperiment)
 data(Microbiome_dat)
 col_data <- colData(Microbiome_dat)
 counts <- t(assay(Microbiome_dat))
