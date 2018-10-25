@@ -48,10 +48,10 @@ Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read c
 require(SummarizedExperiment)
 data(Microbiome_dat)
 col_data=colData(Microbiome_dat)
-pheno <- data.frame(col_data$V1, col_data$V2)
+pheno <- data.frame(col_data$main, col_data$confounder)
 counts <- t(assay(Microbiome_dat))
 batch <- col_data[,3]
-continuous <- data.frame(mcols(col_data))
+continuous <- mcols(col_data)[1:2,]
 ## (not run)
 ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
 }
