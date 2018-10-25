@@ -51,7 +51,7 @@ counts <- t(assay(Microbiome_dat))
 batch <- col_data[,3]
 continuous <- data.frame(mcols(col_data))
 ## (not run)
-## output <- BDMMA(pheno, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
 }
 \references{
 Dai, Zhenwei, et al. "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression." Bioinformatics 1 (2018): 8.
