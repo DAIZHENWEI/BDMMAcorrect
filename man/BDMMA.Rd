@@ -5,18 +5,11 @@
 \alias{BDMMA}
 \title{Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read counts}
 \usage{
-BDMMA(X, Y, batch, continuous, abundance_threshold = 5e-05,
-  burn_in = 5000, sample_period = 5000, bFDR = 0.1, PIPcut = 0.5)
+BDMMA(Microbiome_dat, abundance_threshold = 5e-05, burn_in = 5000,
+  sample_period = 5000, bFDR = 0.1, PIPcut = 0.5)
 }
 \arguments{
-\item{X}{A data.frame for covariates, including main effect variable and confounding variables.
-The first column represents the main effect variable.}
-
-\item{Y}{A matrix/data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.}
-
-\item{batch}{A numeric vector labeling the batch for each sample.}
-
-\item{continuous}{A numeric vector labeling whether the covariates are continous or not.}
+\item{Microbiome_dat}{A SummarizedExperiment object that includes the taxonomy read counts, phenotypes and batch labels.}
 
 \item{abundance_threshold}{The minimum abundance level for the taxa to be included (default value = 5e-05).}
 
@@ -47,13 +40,8 @@ Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read c
 \examples{
 require(SummarizedExperiment)
 data(Microbiome_dat)
-col_data=colData(Microbiome_dat)
-pheno <- data.frame(col_data$main, col_data$confounder)
-counts <- t(assay(Microbiome_dat))
-batch <- col_data[,3]
-continuous <- mcols(col_data)[1:2,]
 ## (not run)
-## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
+## output <- BDMMA(Microbiome_dat, burn_in = 3000, sample_period = 3000)
 }
 \references{
 Dai, Zhenwei, et al. "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression." Bioinformatics 1 (2018): 8.

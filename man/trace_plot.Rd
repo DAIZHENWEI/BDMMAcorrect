@@ -22,13 +22,8 @@ Trace plot of BDMMA output
 \examples{
 require(SummarizedExperiment)
 data(Microbiome_dat)
-col_data=colData(Microbiome_dat)
-pheno <- data.frame(col_data$main, col_data$confounder)
-counts <- t(assay(Microbiome_dat))
-batch <- col_data[,3]
-continuous <- mcols(col_data)[1:2,]
 ## (not run)
-## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
+## output <- BDMMA(Microbiome_dat, burn_in = 3000, sample_period = 3000)
 ## figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))
 ## print(figure)
 }

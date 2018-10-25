@@ -4,13 +4,10 @@
 \alias{VBatch}
 \title{Visualize batch effect with principal coordinate analysis}
 \usage{
-VBatch(Y, batch, main_variable = NULL, method = "bray")
+VBatch(Microbiome_dat, main_variable = NULL, method = "bray")
 }
 \arguments{
-\item{Y}{Y A data.frame for taxonomic read counts with the rows representing clades
-and columns representing taxa.}
-
-\item{batch}{A numeric vector labeling the batch for each sample.}
+\item{Microbiome_dat}{A SummarizedExperiment object that includes the taxonomy read counts, phenotypes and batch labels.}
 
 \item{main_variable}{Optional. A vector containing the main effect variable. Only for
 categorical main effect variable.The function will generate a figure for each catagory.}
@@ -25,13 +22,7 @@ The function returns a list containing plot objects of principal coordinate anal
 Visualize batch effect with principal coordinate analysis
 }
 \examples{
-require(SummarizedExperiment)
 data(Microbiome_dat)
-col_data=colData(Microbiome_dat)
-pheno <- data.frame(col_data$main, col_data$confounder)
-counts <- t(assay(Microbiome_dat))
-batch <- col_data[,3]
-figure <- VBatch(counts, batch = batch, main_variable = pheno[,1], method = "bray")
-print(figure[[1]])
-print(figure[[2]])
+figure <- VBatch(Microbiome_dat, method = "bray")
+print(figure)
 }
