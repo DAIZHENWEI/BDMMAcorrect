@@ -25,20 +25,19 @@
 #' @examples
 #' require(SummarizedExperiment)
 #' data(Microbiome_dat)
-#' col_data=colData(Microbiome_dat)
-#' pheno <- data.frame(col_data$main, col_data$confounder)
-#' counts <- t(assay(Microbiome_dat))
-#' batch <- col_data[,3]
-#' continuous <- mcols(col_data)[1:2,]
 #' ## (not run)
-#' ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
+#' ## output <- BDMMA(Microbiome_dat, burn_in = 3000, sample_period = 3000)
 #' @references Dai, Zhenwei, et al. "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression." Bioinformatics 1 (2018): 8.
 #' @export
 
-BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in = 5000,
+BDMMA=function(Microbiome_dat, abundance_threshold = 0.00005, burn_in = 5000,
                sample_period = 5000, bFDR = 0.1, PIPcut = 0.5){
 
-  batch = as.numeric(factor(batch))
+  col_data=colData(Microbiome_dat)
+  X <- data.frame(col_data$main, col_data$confounder)
+  Y <- t(assay(Microbiome_dat))
+  batch <- as.numeric(factor(col_data[,3]))
+  continuous <- mcols(col_data)[1:2,]
 
   # check input data
   if (length(unique(X[,1]))>2|length(unique(X[,1]))<2){
@@ -190,18 +189,13 @@ BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in =
 #' principal coordinate analysis.
 #' @return The function returns a list containing plot objects of principal coordinate analysis figures.
 #' @examples
-#' require(SummarizedExperiment)
 #' data(Microbiome_dat)
-#' col_data=colData(Microbiome_dat)
-#' pheno <- data.frame(col_data$main, col_data$confounder)
-#' counts <- t(assay(Microbiome_dat))
-#' batch <- col_data[,3]
-#' figure <- VBatch(counts, batch = batch, main_variable = pheno[,1], method = "bray")
-#' print(figure[[1]])
-#' print(figure[[2]])
+#' figure <- VBatch(Microbiome_dat, method = "bray")
+#' print(figure)
 #' @export
-VBatch = function(Y, batch, main_variable = NULL, method = "bray"){
-  batch = as.factor(batch)
+VBatch = function(Microbiome_dat, main_variable = NULL, method = "bray"){
+  Y = t(assay(Microbiome_dat))
+  batch = as.factor(col_data[,3])
   nsize = rowSums(Y)
   abundance = sweep(Y, 1, nsize, "/")
   distance = vegan::vegdist(x = abundance, method = method)
@@ -295,13 +289,8 @@ fdr_cut = function(PIP_vec, alpha = 0.1){
 #' @examples
 #' require(SummarizedExperiment)
 #' data(Microbiome_dat)
-#' col_data=colData(Microbiome_dat)
-#' pheno <- data.frame(col_data$main, col_data$confounder)
-#' counts <- t(assay(Microbiome_dat))
-#' batch <- col_data[,3]
-#' continuous <- mcols(col_data)[1:2,]
 #' ## (not run)
-#' ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
+#' ## output <- BDMMA(Microbiome_dat, burn_in = 3000, sample_period = 3000)
 #' ## figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))
 #' ## print(figure)
 #' @export
