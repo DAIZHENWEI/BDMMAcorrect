@@ -43,27 +43,30 @@ The package includes a sample data set, named 'Microbiome_dat', which can be loa
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(BDMMAcorrect)
 ```
-```{r, echo=T}
+```{r results='hide, echo=T}
+library(SummarizedExperiment)
 data(Microbiome_dat)
-names(Microbiome_dat)
-attach(Microbiome_dat)
+col_data <- colData(Microbiome_dat)
+counts <- t(assay(Microbiome_dat))
+pheno <- data.frame(col_data$V1, col_data$V2)
+batch <- col_data[,3]
+continuous <- data.frame(mcols(col_data))
 ```
 
 
 `BDMMAcorrect` provides a function to visualize the differences of the taxonomic composition across cohorts with the principal coordinate analysis. `VBatch` plots the first two principal coordinates of the corresponding samples and the 80% confidence ellipse of each batch. 
 
 ```{r, echo=TRUE}
-counts=as.data.frame(t(counts))
 figure = VBatch(counts, batch = batch, method = "bray")
 print(figure)
 ```
 
 For a case/control study, `VBatch` can also visualize the batch effect of the case and control samples respectively.
 ```{r, echo=TRUE}
-main_variable = pheno[,1]
+main_variable <- pheno[,1]
 main_variable[main_variable == 0] <- "Control"
 main_variable[main_variable == 1] <- "Case"
-figure = VBatch(counts, batch = batch, main_variable = main_variable, method = "bray")
+figure <- VBatch(counts, batch = batch, main_variable = main_variable, method = "bray")
 print(figure[[1]])
 ```
 
