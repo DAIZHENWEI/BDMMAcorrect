@@ -29,7 +29,7 @@
 #' pheno <- data.frame(col_data$V1, col_data$V2)
 #' counts <- t(assay(Microbiome_dat))
 #' batch <- col_data[,3]
-#' continuous <- data.frame(mcols(col_data))
+#' continuous <- mcols(col_data)[1:2,]
 #' ## (not run)
 #' ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
 #' @references Dai, Zhenwei, et al. "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression." Bioinformatics 1 (2018): 8.
@@ -299,7 +299,7 @@ fdr_cut = function(PIP_vec, alpha = 0.1){
 #' pheno <- data.frame(col_data$V1, col_data$V2)
 #' counts <- t(assay(Microbiome_dat))
 #' batch <- col_data[,3]
-#' continuous <- data.frame(mcols(col_data))
+#' continuous <- mcols(col_data)[1:2,]
 #' ## (not run)
 #' ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
 #' ## figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))
