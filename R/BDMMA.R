@@ -22,13 +22,15 @@
 #' \item{bFDR}{The corresponding bFDR under the selected microbial taxa.}
 #' @docType data
 #' @examples
+#' library(SummarizedExperiment)
 #' data(Microbiome_dat)
-#' X <- Microbiome_dat$pheno
-#' Y <- t(Microbiome_dat$counts)
-#' batch <- Microbiome_dat$batch
-#' continuous <- Microbiome_dat$continuous
+#' col_data=colData(Microbiome_dat)
+#' pheno <- data.frame(col_data$V1, col_data$V2)
+#' counts <- t(assay(Microbiome_dat))
+#' batch <- col_data[,3]
+#' continuous <- data.frame(mcols(col_data))
 #' ## (not run)
-#' ## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+#' ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
 #' @references Dai, Zhenwei, et al. "Batch Effects Correction for Microbiome Data with Dirichlet-multinomial Regression." Bioinformatics 1 (2018): 8.
 #' @export
 
@@ -187,10 +189,12 @@ BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in =
 #' principal coordinate analysis.
 #' @return The function returns a list containing plot objects of principal coordinate analysis figures.
 #' @examples
+#' library(SummarizedExperiment)
 #' data(Microbiome_dat)
-#' counts=t(Microbiome_dat$counts)
-#' batch=Microbiome_dat$batch
-#' pheno=Microbiome_dat$pheno
+#' col_data=colData(Microbiome_dat)
+#' pheno <- data.frame(col_data$V1, col_data$V2)
+#' counts <- t(assay(Microbiome_dat))
+#' batch <- col_data[,3]
 #' figure <- VBatch(counts, batch = batch, main_variable = pheno[,1], method = "bray")
 #' print(figure[[1]])
 #' print(figure[[2]])
@@ -288,13 +292,15 @@ fdr_cut = function(PIP_vec, alpha = 0.1){
 #' @param col A string defining the color of trace plot (default color is black)
 #' @return The function returns a list containing plot objects of parameters' trace plot.
 #' @examples
+#' library(SummarizedExperiment)
 #' data(Microbiome_dat)
-#' X <- Microbiome_dat$pheno
-#' Y <- t(Microbiome_dat$counts)
-#' batch <- Microbiome_dat$batch
-#' continuous <- Microbiome_dat$continuous
+#' col_data=colData(Microbiome_dat)
+#' pheno <- data.frame(col_data$V1, col_data$V2)
+#' counts <- t(assay(Microbiome_dat))
+#' batch <- col_data[,3]
+#' continuous <- data.frame(mcols(col_data))
 #' ## (not run)
-#' ## output <- BDMMA(X, Y, batch, continuous, burn_in = 3000, sample_period = 3000)
+#' ## output <- BDMMA(pheno, counts, batch, continuous, burn_in = 3000, sample_period = 3000)
 #' ## figure <- trace_plot(output$trace, param = c("alpha_1", "beta1_10"))
 #' ## print(figure)
 #' @export
