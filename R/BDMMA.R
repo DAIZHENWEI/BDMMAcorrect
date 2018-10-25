@@ -2,8 +2,9 @@
 #' @import Rcpp RcppArmadillo RcppEigen
 #' @param X A data.frame for covariates, including main effect variable and confounding variables.
 #' The first column represents the main effect variable.
-#' @param Y A data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.
+#' @param Y A matrix/data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.
 #' @param batch A numeric vector labeling the batch for each sample.
+#' @param continuous A numeric vector labeling whether the covariates are continous or not.
 #' @param abundance_threshold The minimum abundance level for the taxa to be included (default value = 5e-05).
 #' @param burn_in The length of burn in period before sampling the parameters (default value = 5,000).
 #' @param sample_period The length of sampling period for estimating parameters' distribution (default value = 5,000)
@@ -22,7 +23,7 @@
 #' \item{bFDR}{The corresponding bFDR under the selected microbial taxa.}
 #' @docType data
 #' @examples
-#' library(SummarizedExperiment)
+#' require(SummarizedExperiment)
 #' data(Microbiome_dat)
 #' col_data=colData(Microbiome_dat)
 #' pheno <- data.frame(col_data$V1, col_data$V2)
@@ -189,7 +190,7 @@ BDMMA=function(X, Y, batch, continuous, abundance_threshold = 0.00005, burn_in =
 #' principal coordinate analysis.
 #' @return The function returns a list containing plot objects of principal coordinate analysis figures.
 #' @examples
-#' library(SummarizedExperiment)
+#' require(SummarizedExperiment)
 #' data(Microbiome_dat)
 #' col_data=colData(Microbiome_dat)
 #' pheno <- data.frame(col_data$V1, col_data$V2)
@@ -292,7 +293,7 @@ fdr_cut = function(PIP_vec, alpha = 0.1){
 #' @param col A string defining the color of trace plot (default color is black)
 #' @return The function returns a list containing plot objects of parameters' trace plot.
 #' @examples
-#' library(SummarizedExperiment)
+#' require(SummarizedExperiment)
 #' data(Microbiome_dat)
 #' col_data=colData(Microbiome_dat)
 #' pheno <- data.frame(col_data$V1, col_data$V2)
