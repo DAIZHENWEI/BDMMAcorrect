@@ -12,9 +12,11 @@ BDMMA(X, Y, batch, continuous, abundance_threshold = 5e-05,
 \item{X}{A data.frame for covariates, including main effect variable and confounding variables.
 The first column represents the main effect variable.}
 
-\item{Y}{A data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.}
+\item{Y}{A matrix/data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.}
 
 \item{batch}{A numeric vector labeling the batch for each sample.}
+
+\item{continuous}{A numeric vector labeling whether the covariates are continous or not.}
 
 \item{abundance_threshold}{The minimum abundance level for the taxa to be included (default value = 5e-05).}
 
@@ -43,7 +45,7 @@ taxa; eta: the standard deviation of the spike distribution (in the spike-and-sl
 Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read counts
 }
 \examples{
-library(SummarizedExperiment)
+require(SummarizedExperiment)
 data(Microbiome_dat)
 col_data=colData(Microbiome_dat)
 pheno <- data.frame(col_data$V1, col_data$V2)

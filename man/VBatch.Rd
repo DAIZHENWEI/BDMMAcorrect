@@ -25,7 +25,7 @@ The function returns a list containing plot objects of principal coordinate anal
 Visualize batch effect with principal coordinate analysis
 }
 \examples{
-library(SummarizedExperiment)
+require(SummarizedExperiment)
 data(Microbiome_dat)
 col_data=colData(Microbiome_dat)
 pheno <- data.frame(col_data$V1, col_data$V2)
