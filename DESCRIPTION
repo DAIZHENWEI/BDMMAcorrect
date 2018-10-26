@@ -10,7 +10,7 @@ License: GPL (>= 2)
 Depends: R (>= 3.5), vegan, ellipse
 Encoding: UTF-8
 LazyData: true
-Imports: Rcpp (>= 0.12.12), RcppArmadillo, RcppEigen, ggplot2, ape, SummarizedExperiment
+Imports: Rcpp (>= 0.12.12), RcppArmadillo, RcppEigen, ggplot2, ape, SummarizedExperiment, BiocGenerics
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
 biocViews: BatchEffect, Microbiome, Bayesian
 RoxygenNote: 6.0.1
