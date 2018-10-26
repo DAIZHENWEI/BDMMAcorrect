@@ -1,10 +1,6 @@
 #' Bayesian Dirichlet--Multinomial approach for meta-analysis of metagenomic read counts
 #' @import Rcpp RcppArmadillo RcppEigen
-#' @param X A data.frame for covariates, including main effect variable and confounding variables.
-#' The first column represents the main effect variable.
-#' @param Y A matrix/data.frame for taxonomic read counts with the rows representing clades and columns representing taxa.
-#' @param batch A numeric vector labeling the batch for each sample.
-#' @param continuous A numeric vector labeling whether the covariates are continous or not.
+#' @param Microbiome_dat A SummarizedExperiment object that includes the taxonomy read counts, phenotypes and batch labels.
 #' @param abundance_threshold The minimum abundance level for the taxa to be included (default value = 5e-05).
 #' @param burn_in The length of burn in period before sampling the parameters (default value = 5,000).
 #' @param sample_period The length of sampling period for estimating parameters' distribution (default value = 5,000)
@@ -180,9 +176,7 @@ BDMMA=function(Microbiome_dat, abundance_threshold = 0.00005, burn_in = 5000,
 
 
 #' Visualize batch effect with principal coordinate analysis
-#' @param Y Y A data.frame for taxonomic read counts with the rows representing clades
-#' and columns representing taxa.
-#' @param batch A numeric vector labeling the batch for each sample.
+#' @param Microbiome_dat A SummarizedExperiment object that includes the taxonomy read counts, phenotypes and batch labels.
 #' @param main_variable Optional. A vector containing the main effect variable. Only for
 #' categorical main effect variable.The function will generate a figure for each catagory.
 #' @param method A string indicating which method should be used to calculate the distance matrix for
