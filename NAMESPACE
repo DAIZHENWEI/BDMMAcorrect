@@ -19,5 +19,6 @@ importFrom(ggplot2, geom_path)
 importFrom(ellipse, ellipse)
 importFrom(vegan, vegdist)
 import(SummarizedExperiment)
+import(stats)
 
 useDynLib(BDMMAcorrect)
