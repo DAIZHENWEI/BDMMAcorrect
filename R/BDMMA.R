@@ -213,7 +213,7 @@ VBatch = function(Microbiome_dat, main_variable = NULL, method = "bray"){
         df = data.frame(df,group = g)
         curve = rbind(curve,df)
       }
-      g = ggplot(aes(x = PC1, y = PC2, color = batch),data = point_sub) +
+      g = ggplot(aes_string(x = 'PC1', y = 'PC2', color = 'batch'),data = point_sub) +
         geom_point(size = 2) + theme(legend.position = "right") +
         ggtitle(paste("main_variable =", i)) +
         theme(plot.title = element_text(hjust = 0.5), title = element_text(size = 12)) +
@@ -222,7 +222,7 @@ VBatch = function(Microbiome_dat, main_variable = NULL, method = "bray"){
         theme(legend.title = element_text(size = 13)) +
         theme(axis.title = element_text(size = 13)) +
         theme(axis.text = element_text(size = 12)) +
-        geom_path(data = curve, aes(x = x, y = y, colour = group), size = 1, linetype = 1)
+        geom_path(data = curve, aes_string(x = 'x', y = 'y', colour = 'group'), size = 1, linetype = 1)
       figure[[k]] = g
       k = k + 1
     }
@@ -238,7 +238,7 @@ VBatch = function(Microbiome_dat, main_variable = NULL, method = "bray"){
       df = data.frame(df,group=g)
       curve = rbind(curve,df)
     }
-    g = ggplot(aes(x = PC1, y = PC2, color = batch), data = point) +
+    g = ggplot(aes_string(x = 'PC1', y = 'PC2', color = 'batch'), data = point) +
       geom_point(size = 2) + theme(legend.position = "right") +
       theme(plot.title = element_text(hjust = 0.5),title = element_text(size = 12)) +
       theme(panel.background = element_blank(), axis.line = element_line(colour = "black")) +
@@ -246,7 +246,7 @@ VBatch = function(Microbiome_dat, main_variable = NULL, method = "bray"){
       theme(legend.title = element_text(size = 13)) +
       theme(axis.title = element_text(size = 13)) +
       theme(axis.text = element_text(size = 12)) +
-      geom_path(data = curve, aes(x = x, y = y, colour = group), size = 1, linetype = 1)
+      geom_path(data = curve, aes_string(x = 'x', y = 'y', colour = 'group'), size = 1, linetype = 1)
     figure = g
   }
   return(figure)
@@ -302,7 +302,7 @@ trace_plot = function(trace, param, col = "black"){
   for (j in param){
     trace_j = trace[, names(trace) == j]
     trace_j = data.frame(iter = seq_len(nrow(trace)), value = trace_j)
-    g = ggplot(aes(x = iter, y = value), data = trace_j) +
+    g = ggplot(aes_string(x = 'iter', y = 'value'), data = trace_j) +
       geom_line(colour = col) + ggtitle(paste("The trace plot of parameter", j)) +
       theme(plot.title = element_text(hjust = 0.5),title = element_text(size = 12)) +
       theme(legend.text = element_text(size = 13)) +
