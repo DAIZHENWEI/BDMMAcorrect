@@ -39,23 +39,28 @@ We adopt the Bayesian approach and provide proper prior distributions for the pa
 
 ## 2. Analysis Example
 
-The package includes a sample data set, named 'Microbiome_dat', which can be loaded directly. `Microbiome_dat` is a list containing four arguments, namely `pheno`: a `data.frame` of covariates containing a main effect variable in the 1st column and a confounding variable in the 2nd column; `counts`: a `matrix` of the taxonomic read counts containing 80 samples and 40 taxa (samples in columns and taxa in rows); `batch`: a numeric vector labeling the batch of each sample; `continuous`: a numeric vector indicating whether the variables are continuous($=0$) or catagorical($\neq 0$).  
+We simulated a sample data set, named `Microbiome_dat`, including 80 samples and 40 taxa. The read counts were simulated from the DM distribution according to the BDMMA model assumptions. We also simulated a main effect variable  (case/control status) and a confounding variable. `Microbiome_dat` is a SummarizedExperiment object and be loaded directly.
+
+We use `colData` to retrieve the phenotype and batch information, and store them in `col_data`. Variable `main` is the main effect variable, `confounder` is the confounding variable and `batch` includes the batch labels of all the samples. The read counts can be accessed with `assay`, which will return a `matrix` object. 
 ```{r results='hide', message=FALSE, warning=FALSE}
 library(BDMMAcorrect)
 require(SummarizedExperiment)
 data(Microbiome_dat)
+### Access phenotypes information 
 col_data <- colData(Microbiome_dat)
-counts <- t(assay(Microbiome_dat))
-pheno <- data.frame(col_data$V1, col_data$V2)
+pheno <- data.frame(col_data$main, col_data$confounder)
 batch <- col_data[,3]
-continuous <- data.frame(mcols(col_data))
+### Access taxonomy read counts 
+counts <- t(assay(Microbiome_dat))
+### Indicate whether the phenotype variables are continuous
+continuous <- mcols(col_data)[1:2,]
 ```
 
 
 `BDMMAcorrect` provides a function to visualize the differences of the taxonomic composition across cohorts with the principal coordinate analysis. `VBatch` plots the first two principal coordinates of the corresponding samples and the 80% confidence ellipse of each batch. 
 
 ```{r, echo=TRUE}
-figure = VBatch(counts, batch = batch, method = "bray")
+figure = VBatch(Microbiome_dat = Microbiome_dat, method = "bray")
 print(figure)
 ```
 
@@ -64,7 +69,7 @@ For a case/control study, `VBatch` can also visualize the batch effect of the ca
 main_variable <- pheno[,1]
 main_variable[main_variable == 0] <- "Control"
 main_variable[main_variable == 1] <- "Case"
-figure <- VBatch(counts, batch = batch, main_variable = main_variable, method = "bray")
+figure <- VBatch(Microbiome_dat = Microbiome_dat, main_variable = main_variable, method = "bray")
 print(figure[[1]])
 ```
 
@@ -75,7 +80,7 @@ print(figure[[2]])
 Then, the main function `BDMMA` can work directly on `Microbiome_dat`. `BDMMAcorrect` provides the freedom to ignore the low abundant taxa. `BDMMAcorrect` runs a Markov chain Monte Carlo algorithm to sample from the posterior distribution. The users can set the lengths of the burn-in period and the sampling period for the Markov chain. In this example, the lengths of burn-in and sampling period are set to 4000. 
 
 ```{r, echo=TRUE}
-output <- BDMMA(pheno, counts, batch, continuous, burn_in = 4000, sample_period = 4000)
+output <- BDMMA(Microbiome_dat = Microbiome_dat, burn_in = 4000, sample_period = 4000)
 print(output$selected.taxa)
 head(output$parameter_summary)
 print(output$PIP)
@@ -92,15 +97,25 @@ figure <- trace_plot(trace = output$trace, param = c("alpha_1", "beta1_10"))
 print(figure)
 ```
 
+## Prepare data for analysis 
 
+To prepare develop the data for the analysis, here, the following example shows how to pack the data into a `SummarizedExperiment` object that can be used as the input of the functions.
 
+```{r, echo=TRUE}
+### Simulate counts
+counts <- rmultinom(100,10000,rep(0.02,50))
+### Simulate covariates
+main <- rbinom(100,1,0.5)
+confounder <- rnorm(100,0,1)
+### Simulate batches
+batch <- c(rep(1,50),rep(2,50))
 
-
-
-
-
-
-
+library(SummarizedExperiment)
+col_data <- DataFrame(main, confounder, batch)
+mcols(col_data)$continous <- c(0L, 1L, 0L)
+### pack different datasets into a SummarizedExperiment object
+Microbiome_dat <- SummarizedExperiment(list(counts), colData=col_data)
+```
 
 
 
