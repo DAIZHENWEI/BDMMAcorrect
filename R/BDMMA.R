@@ -188,6 +188,7 @@ BDMMA=function(Microbiome_dat, abundance_threshold = 0.00005, burn_in = 5000,
 #' print(figure)
 #' @export
 VBatch = function(Microbiome_dat, main_variable = NULL, method = "bray"){
+  col_data=colData(Microbiome_dat)
   Y = t(assay(Microbiome_dat))
   batch = as.factor(col_data[,3])
   nsize = rowSums(Y)
