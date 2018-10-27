@@ -29,11 +29,11 @@
 BDMMA=function(Microbiome_dat, abundance_threshold = 0.00005, burn_in = 5000,
                sample_period = 5000, bFDR = 0.1, PIPcut = 0.5){
 
-  col_data=colData(Microbiome_dat)
-  X <- data.frame(col_data$main, col_data$confounder)
-  Y <- t(assay(Microbiome_dat))
-  batch <- as.numeric(factor(col_data[,3]))
-  continuous <- mcols(col_data)[1:2,]
+  col_data = colData(Microbiome_dat)
+  X = data.frame(col_data$main, col_data$confounder)
+  Y = t(assay(Microbiome_dat))
+  batch = as.numeric(factor(col_data[,3]))
+  continuous = mcols(col_data)[1:2,]
 
   # check input data
   if (length(unique(X[,1]))>2|length(unique(X[,1]))<2){
