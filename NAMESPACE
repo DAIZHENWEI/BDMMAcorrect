@@ -25,5 +25,6 @@ importFrom(stats, rbeta)
 importFrom(stats, rbinom)
 importFrom(stats, rexp)
 importFrom(stats, sd)
+importFrom(stats, cor)
 
 useDynLib(BDMMAcorrect)
