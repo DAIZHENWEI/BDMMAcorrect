@@ -60,7 +60,7 @@ BDMMA=function(Microbiome_dat, abundance_threshold = 0.00005, burn_in = 5000,
   n_size = rowSums(Y)
   n_var = ncol(X)
   n_batch = length(unique(batch))
-  taxa = names(YY)
+  taxa = rownames(Microbiome_dat)
 
   # Normalize clinical metadata
   X = sweep(X, 2, colMeans(X), "-")
