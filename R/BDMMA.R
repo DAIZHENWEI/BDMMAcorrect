@@ -159,8 +159,10 @@ BDMMA=function(Microbiome_dat, abundance_threshold = 0.00005, burn_in = 5000,
   cutoff = fdr_cut(L_mean, alpha = bFDR)
   prediction_2 = (L_mean >= cutoff) * 1
   selected.taxa = list()
-  selected.taxa$MIM = taxa[prediction_1 > 0]
-  selected.taxa$bFDR = taxa[prediction_2 > 0]
+  ## selected.taxa$MIM = taxa[prediction_1 > 0]
+  ## selected.taxa$bFDR = taxa[prediction_2 > 0]
+  selected.taxa$MIM = taxa[L_mean > PIPcut]
+  selected.taxa$bFDR = taxa[L_mean > PIPcut]
   output=list()
 
   output$trace = trace
