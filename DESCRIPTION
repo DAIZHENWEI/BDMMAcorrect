@@ -14,5 +14,5 @@ Imports: Rcpp (>= 0.12.12), RcppArmadillo, RcppEigen, stats
 LinkingTo: Rcpp, RcppArmadillo, RcppEigen
 biocViews: ImmunoOncology, BatchEffect, Microbiome, Bayesian
 RoxygenNote: 6.0.1
-Suggests: knitr, rmarkdown, BiocGenerics
+Suggests: knitr, rmarkdown, BiocGenerics, RUnit
 VignetteBuilder: knitr
